@@ -11,20 +11,9 @@
 
 ---
 
-This is a minimal repo that contains the pretrained models for surface normal estimation and depth estimation, and integrates with `torch.hub`.
+This repository contains pretrained models for surface normal estimation and depth estimation from the Omnidata project. It integrates with `torch.hub` for easy model loading and includes a simple Gradio demo.
 
-This repo is based on the [omnidata-tools](https://github.com/EPFL-VILAB/omnidata-tools) repo, but only contains code for downloading and running the pretrained surface normal estimation and depth estimation models.
-
-* Nice torch.hub integration
-* Simple gradio demo
-
-
-
-## Pretrained Models
-Here is an [online demo](https://omnidata.vision/demo/) where you can upload your own images (1 per CAPTCHA).
-
-
-#### Download pretrained models
+#### Use pretrained models 
 
 ```
 import torch
@@ -39,12 +28,21 @@ model_depth = torch.hub.load('alexsax/omnidata_models', 'depth_dpt_hybrid_384')
 model_custom = torch.hub.load('alexsax/omnidata_models', 'dpt_hybrid_384', pretrained=False, task='normal')
 ```
 
-These will download the pretrained models for `depth` and `normals` to a folder called `./pretrained_models`.
+The checkpoints are hosted on Hugging Face:
+- [Surface Normal DPT-Hybrid 384](https://huggingface.co/sashasax/omnidata_normal_dpt_hybrid_384)
+- [Depth DPT-Hybrid 384](https://huggingface.co/sashasax/omnidata_depth_dpt_hybrid_384)
 
-## Run our models on your own image
-After downloading the pretrained models [like above](#pretrained-models), you can run them on your own image with the following command:
+## Run gradio demo
+This will launch a web interface where you can upload images and see the estimated surface normals.
+
 ```bash
-python demo.py --task $TASK --img_path $PATH_TO_IMAGE_OR_FOLDER --output_path $PATH_TO_SAVE_OUTPUT
+python gradio_app.py
+```
+
+## Run script locally
+You can run them on your own image with the following command:
+```bash
+python demo.py --task $TASK --img_path $PATH_TO_IMAGE_OR_FOLDER --output_path $PATH_TO_SAVE_OUTPUT 
 ```
 The `--task` flag should be either `normal` or `depth`. To run the script for a `normal` target on an [example image](./assets/demo/test1.png):
 ```bash

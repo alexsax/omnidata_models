@@ -11,13 +11,14 @@ from omnidata_models.model.dpt.dpt_depth import DPTDepthModel
 
 def setup_model(device: torch.device) -> Tuple[torch.nn.Module, int]:
     image_size = 384
-    model = DPTDepthModel(backbone='vitb_rn50_384', num_channels=3)
-    hf_url = 'https://huggingface.co/sashasax/omnidata_normal_dpt_hybrid_384/resolve/main/omnidata_normal_dpt_hybrid.pth'
+    # model = DPTDepthModel(backbone='vitb_rn50_384', num_channels=3)
+    # hf_url = 'https://huggingface.co/sashasax/omnidata_normal_dpt_hybrid_384/resolve/main/omnidata_normal_dpt_hybrid.pth'
     
-    print(f"Downloading model from {hf_url}")
-    state_dict = torch.hub.load_state_dict_from_url(hf_url, map_location=device, weights_only=True)
+    # print(f"Downloading model from {hf_url}")
+    # state_dict = torch.hub.load_state_dict_from_url(hf_url, map_location=device, weights_only=True)
     
-    model.load_state_dict(state_dict)
+    # model.load_state_dict(state_dict)
+    model = torch.hub.load('alexsax/omnidata_models', 'surface_normal_dpt_hybrid_384')
     model.to(device)
     model.eval()
 
