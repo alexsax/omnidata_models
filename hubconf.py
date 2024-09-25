@@ -16,8 +16,11 @@ def dpt_hybrid_384(pretrained=True, task='normal', **kwargs):
     """
     if task not in ['normal', 'depth']:
         raise ValueError("Task should be one of the following: normal, depth")
-    
-    model = DPTDepthModel(backbone='vitb_rn50_384', num_channels=3)
+
+    if task == 'normal':
+        model = DPTDepthModel(backbone='vitb_rn50_384', num_channels=3)
+    else:
+        model = DPTDepthModel(backbone='vitb_rn50_384')
     
     if pretrained:
         if task == 'normal':
