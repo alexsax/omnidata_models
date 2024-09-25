@@ -52,7 +52,7 @@ iface = gr.Interface(
     inputs=gr.Image(type="pil"),
     outputs=gr.Image(type="pil"),
     title="Monocular Surface Normal Estimation: Omnidata DPT-Hybrid",
-    description="Upload an image to estimate monocular surface normals.",
+    description="Upload an image to estimate monocular surface normals. To use these models locally, you can use `torch.hub.load`. Code and examples in our [Github](https://github.com/alexsax/omnidata_models) repository. More information and the paper in the project page [Omnidata: A Scalable Pipeline for Making Multi-Task Mid-Level Vision Datasets from 3D Scans](https://omnidata.epfl.ch/).",
     examples=[
         "https://github.com/EPFL-VILAB/omnidata/blob/main/omnidata_tools/torch/assets/test1_rgb.png?raw=true",
         "https://github.com/EPFL-VILAB/omnidata/blob/main/omnidata_tools/torch/assets/demo/test2.png?raw=true",
