@@ -1,19 +1,22 @@
 <div align="center">
 
 
-# Omnidata: _PyTorch Models and Dataloaders_
-[`Project Website`](https://omnidata.vision) &centerdot; [`Paper`](https://arxiv.org/abs/2110.04994) &centerdot; [`Github`](https://github.com/EPFL-VILAB/omnidata-tools/tree/main/omnidata_tools/torch) &centerdot; [`Data`](https://github.com/EPFL-VILAB/omnidata/tree/main/omnidata_tools/dataset#readme) &centerdot; [`PyTorch Utils + Weights`](https://github.com/EPFL-VILAB/omnidata/tree/main/omnidata_tools/torch#readme) &centerdot;  [`Annotator`](https://github.com/EPFL-VILAB/omnidata-tools/tree/main/omnidata_annotator#readme) 
+# Omnidata Pretrained Models (ICCV 2021)
+### Surface Normal and Depth Estimation
 
-**Omnidata: A Scalable Pipeline for Making Multi-Task Mid-Level Vision Datasets from 3D Scans (ICCV 2021)**
+
+[`Project Website`](https://omnidata.vision) &centerdot; [`Paper`](https://arxiv.org/abs/2110.04994) &centerdot; [`Github`](https://github.com/EPFL-VILAB/omnidata-tools/tree/main/omnidata_tools/torch) &centerdot; [`Data`](https://github.com/EPFL-VILAB/omnidata/tree/main/omnidata_tools/dataset#readme) &centerdot; [`PyTorch Utils + Weights`](https://github.com/EPFL-VILAB/omnidata/tree/main/omnidata_tools/torch#readme) &centerdot;  [`Annotator`](https://github.com/EPFL-VILAB/omnidata-tools/tree/main/omnidata_annotator#readme)
 
 </div>
 
 
+
+> This repository contains pretrained models for surface normal estimation and depth estimation from the Omnidata project. It integrates with `torch.hub` for easy model loading and includes a simple Gradio demo.
+
+[![Monocular Surface Normal Estimation](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face%20Spaces-Monocular_Surface_Normal_dpt_hybrid_384-blue)](https://huggingface.co/spaces/sashasax/omnidata_monocular_surface_normal_dpt_hybrid_384)
 ---
 
-This repository contains pretrained models for surface normal estimation and depth estimation from the Omnidata project. It integrates with `torch.hub` for easy model loading and includes a simple Gradio demo.
-
-#### Use pretrained models 
+#### Load pretrained models 
 
 ```
 import torch
@@ -32,14 +35,29 @@ The checkpoints are hosted on Hugging Face:
 - [Surface Normal DPT-Hybrid 384](https://huggingface.co/sashasax/omnidata_normal_dpt_hybrid_384)
 - [Depth DPT-Hybrid 384](https://huggingface.co/sashasax/omnidata_depth_dpt_hybrid_384)
 
-## Run gradio demo
+#### Example results
+
+|  |   |   |   |  |  |  |
+| :-------------:|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
+| ![](https://github.com/EPFL-VILAB/omnidata/raw/main/omnidata_tools/torch/assets/demo/test1.png) | ![](https://github.com/EPFL-VILAB/omnidata/raw/main/omnidata_tools/torch/assets/demo/test2.png) |![](https://github.com/EPFL-VILAB/omnidata/raw/main/omnidata_tools/torch/assets/demo/test3.png) | ![](https://github.com/EPFL-VILAB/omnidata/raw/main/omnidata_tools/torch/assets/demo/test4.png) | ![](https://github.com/EPFL-VILAB/omnidata/raw/main/omnidata_tools/torch/assets/demo/test5.png) |![](https://github.com/EPFL-VILAB/omnidata/raw/main/omnidata_tools/torch/assets/demo/test7.png) |![](https://github.com/EPFL-VILAB/omnidata/raw/main/omnidata_tools/torch/assets/demo/test9.png) |
+| ![](https://github.com/EPFL-VILAB/omnidata/raw/main/omnidata_tools/torch/assets/demo/test1_normal.png) | ![](https://github.com/EPFL-VILAB/omnidata/raw/main/omnidata_tools/torch/assets/demo/test2_normal.png) |![](https://github.com/EPFL-VILAB/omnidata/raw/main/omnidata_tools/torch/assets/demo/test3_normal.png) | ![](https://github.com/EPFL-VILAB/omnidata/raw/main/omnidata_tools/torch/assets/demo/test4_normal.png) | ![](https://github.com/EPFL-VILAB/omnidata/raw/main/omnidata_tools/torch/assets/demo/test5_normal.png) | ![](https://github.com/EPFL-VILAB/omnidata/raw/main/omnidata_tools/torch/assets/demo/test7_normal.png) | ![](https://github.com/EPFL-VILAB/omnidata/raw/main/omnidata_tools/torch/assets/demo/test9_normal.png) |
+| ![](https://github.com/EPFL-VILAB/omnidata/raw/main/omnidata_tools/torch/assets/demo/test1_depth.png) | ![](https://github.com/EPFL-VILAB/omnidata/raw/main/omnidata_tools/torch/assets/demo/test2_depth.png) | ![](https://github.com/EPFL-VILAB/omnidata/raw/main/omnidata_tools/torch/assets/demo/test3_depth.png) | ![](https://github.com/EPFL-VILAB/omnidata/raw/main/omnidata_tools/torch/assets/demo/test4_depth.png) | ![](https://github.com/EPFL-VILAB/omnidata/raw/main/omnidata_tools/torch/assets/demo/test5_depth.png) | ![](https://github.com/EPFL-VILAB/omnidata/raw/main/omnidata_tools/torch/assets/demo/test7_depth.png) | ![](https://github.com/EPFL-VILAB/omnidata/raw/main/omnidata_tools/torch/assets/demo/test9_depth.png)
+
+First, install the dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+#### Run gradio demo
 This will launch a web interface where you can upload images and see the estimated surface normals.
 
 ```bash
-python gradio_app.py
+python app.py
 ```
 
-## Run script locally
+
+
+#### Run script
 You can run them on your own image with the following command:
 ```bash
 python demo.py --task $TASK --img_path $PATH_TO_IMAGE_OR_FOLDER --output_path $PATH_TO_SAVE_OUTPUT 
@@ -48,12 +66,6 @@ The `--task` flag should be either `normal` or `depth`. To run the script for a 
 ```bash
 python demo.py --task normal --img_path assets/demo/test1.png --output_path assets/
 ```
-|  |   |   |   |  |  |  |
-| :-------------:|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
-| ![](./assets/demo/test1.png) | ![](./assets/demo/test2.png) |![](./assets/demo/test3.png) | ![](./assets/demo/test4.png) | ![](./assets/demo/test5.png) |![](./assets/demo/test7.png) |![](./assets/demo/test9.png) |
-| ![](./assets/demo/test1_normal.png) | ![](./assets/demo/test2_normal.png) |![](./assets/demo/test3_normal.png) | ![](./assets/demo/test4_normal.png) | ![](./assets/demo/test5_normal.png) | ![](./assets/demo/test7_normal.png) | ![](./assets/demo/test9_normal.png) |
-| ![](./assets/demo/test1_depth.png) | ![](./assets/demo/test2_depth.png) | ![](./assets/demo/test3_depth.png) | ![](./assets/demo/test4_depth.png) | ![](./assets/demo/test5_depth.png) | ![](./assets/demo/test7_depth.png) | ![](./assets/demo/test9_depth.png)
-
 
 
 ### Network Architecture
@@ -66,15 +78,6 @@ python demo.py --task normal --img_path assets/demo/test1.png --output_path asse
     - Habitat-Matterport 3D Dataset (HM3D) is added to the training data.
     - 1 week of training with 2D and [3D data augmentations](https://3dcommoncorruptions.epfl.ch/) and 1 week of training with [cross-task consistency](https://consistency.epfl.ch/) on 4xV100.
 
-
-#### Packages
-You can see the complete list of required packages in [requirements.txt](https://github.com/Ainaz99/omnidata-tools/blob/main/requirements.txt). We recommend using conda or virtualenv for the installation.
-
-```bash
-conda create -n testenv -y python=3.8
-source activate testenv
-pip install -r requirements.txt
-```
 
 
 ## Citation
